@@ -15,3 +15,8 @@
  *git add git-exercise.rb
  *git commit -m"Updated git-exercise"
  *git push   
+3.Commit changes
+ *chceking status through 'git status'
+ *checked diff for file shown in status through 'git diff filename'
+ *commit the changes, git commit -m "Commiting changes" git-exercise.rb
+ *pushing it git push   
