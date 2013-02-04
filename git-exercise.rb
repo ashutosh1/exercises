@@ -54,5 +54,23 @@
   C. git branch -r --contains $commit(list the branch that have commits.)
 10.Display a specific commit 
   A. git rev-list --remotes and then pick first commit 
-  B. git show 52354edde49a7ff106ea9d8d37f732a43da03c5e
+  B. git show 52354edde49a7ff106ea9d8d37f732.a43da03c5e
 11.Create branches called "feature1" and "feature2" from master. 11 . Delete branch "feature2"
+    A. git checkout -b 'feature1'(if you are already on master branch otherwise first checkout'git checkout master' to master branch)
+    B. do the work in current branch and commit it if you want otherwise switch to next step. 
+    C. git push --all(it will create the branch )
+  * creating feature2 branch
+    A. git checkout master
+    B. git checkout -b 'feature2'
+    C. git push --all
+    D. git branch -r(shows all master,feature1 and feature2)
+  *deleting feature2 branch
+    A. git branch -d feature2
+    B. git branch -l(shown only two branch not shown feature2)
+    C. git branch -r(shows all master,feature1 and feature2)
+    D. git push origin :feature2
+    E. git branch -l(shown only two branch not shown feature2)
+    F. git branch -r(shown only two branch not shown feature2)
+12.Make some commits on "feature1".
+   A. echo "Testing for merging and rebasing" >> README on feature1
+   A. echo "Comparing for merging and rebasing" >> README on master
