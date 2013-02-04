@@ -32,6 +32,6 @@
     A. echo "Ashutosh is currently working for vinsol" >> README
     B. git commit -m"changed README file" README
     C. echo "demo of git commit --amend" >> README
-    D. git commit --amend README
+    D. git commit --amend README git-exercise.rb
   *Reverting the changes after it added to the staging area
-    A.
+    A. git reset HEAD README
