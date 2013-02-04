@@ -30,8 +30,29 @@
 6.Create changes and revert those changes after adding changes to staging area 
   *Changed the README file
     A. echo "Ashutosh is currently working for vinsol" >> README
-    B. git commit -m"changed README file" README
-    C. echo "demo of git commit --amend" >> README
-    D. git commit --amend README git-exercise.rb
+    B. git add README
   *Reverting the changes after it added to the staging area
-    A. git reset HEAD README
+    A. git reset HEAD READM
+    B. git checkout README
+    OR We can also revert it through using Head from 'git log' and specifying specific commit with options availabel to git reset.
+7.Create change and revert those changes after committing those changes .
+    A. echo "Ashutosh is currently working for vinsol" >> README
+    B. git commit -m"changed README file" README
+  *Reverting the changes after commiting
+    C. git revert HEAD --no-edit
+8.Check repository status before adding changes to staging area, after adding changes to staging area and after committing changes .
+  A. echo "Ashutosh is currently working for vinsol" >> README
+  B. git status And then git diff README
+  C. git add README
+  D. git status (showing modified README)
+  E. git commit -m "Tracking repository status" README
+  F. git status and then git log(status show nothing about README but log shows commits and modified README)
+  G. git push
+9.Display all the commits .
+  A. git log (shows all commits , can be customized with option of git log)
+  B. git rev-list --remotes (shows commit version )
+  C. git branch -r --contains $commit(list the branch that have commits.)
+10.Display a specific commit 
+  A. git rev-list --remotes and then pick first commit 
+  B. git show 52354edde49a7ff106ea9d8d37f732a43da03c5e
+11.Create branches called "feature1" and "feature2" from master. 11 . Delete branch "feature2"
