@@ -71,6 +71,25 @@
     D. git push origin :feature2
     E. git branch -l(shown only two branch not shown feature2)
     F. git branch -r(shown only two branch not shown feature2)
-12.Make some commits on "feature1".
+12.Make some commits on "feature1",Make some commits on branch "master",merge branch "feature1" in master
    A. echo "Testing for merging and rebasing" >> README on feature1
-   A. echo "Comparing for merging and rebasing" >> README on master
+   B. git commit -m"Read Me Doc" README and then git push
+   C. echo "Comparing for merging and rebasing" >> README on master
+   D. git commit -m"Read Me Doc for master" README 
+   E. git checkout master
+   F. git merge feature1
+   G. got conflict resloving the conflict and then git add file and git commit -a
+   G. git push
+13.Create branch "feature2" from master,Make some commits on "feature2",Make some commits on branch "master",rebase branch "master" in "feature2"
+  *Creating branch feature2
+   A. git checkout -b feature2
+   B. git push --all
+  *commiting the changes and rebasing 
+   A. echo "Testing for merging and rebasing" >> README on master
+   B. git commit -m"Read Me Doc" README and then git push
+   C. echo "Comparing for merging and rebasing" >> README on master
+   D. git commit -m"Read Me Doc for master" README and the git commit
+   E. git checkout feature2
+   F. git rebase master
+
+
