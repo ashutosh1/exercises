@@ -91,5 +91,20 @@
    D. git commit -m"Read Me Doc for master" README and the git commit
    E. git checkout feature2
    F. git rebase master
-
-
+   G.git checkout master
+   H. git merge feature2
+   I. git push
+14.Find the differences between "merge" and "rebase" in above cases.
+    A. My local commit to feature2 branch is overwritten after rebase and added as new commit with different id.
+    B. If there are lot of developer working on a same branch then we should avoid rebase.
+15.Use git stash
+  A. git checkout feature1(it shows stash your changes 'git exercise.rb' was changed)
+  B. git stash
+  C. git checkout feature1
+  D. git merge master
+  E. git checkout feature1
+  F. git stash list
+  G. git stash pop
+16.Create a repository on github for your working repository and push changes on remote repository
+  A. it has already done because i am pushing the code to remote repository.
+  B. Link of remote repository is https://github.com/ashutosh1/exercises
