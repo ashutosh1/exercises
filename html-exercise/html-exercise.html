@@ -1,0 +1,72 @@
+<!-- This is the demo exercise for vinsol training programm-->
+<!DOCTYPE html>
+<html>
+<!-- Title to be appear in toolbar of browser-->
+<head><title>HTML form exercise</title></head>
+<body>
+ 	<form name="my form" action="" method="get">
+    <!--Using tabel to show following boxes in proper format,not using div and span because i am not going to use css -->
+    <table>
+		  <th>Contact form</th>
+			<tr>
+        <td>Yourname*:</td>
+		 		<td><input type="text" name="name"></td>
+			</tr>
+			<tr>
+		 		<td>E-mail*:</td>
+		 		<td><input type="email" name="email" style="background-color:yellow;"></td>
+			</tr>
+			<tr>
+        <!--it can accept any text,we can use type 'number' but some browser doesn't support it.-->
+		 		<td>Phone number:</td>
+				<td><input type="text" name="phone" style="background-color:yellow;"></td>
+			</tr>
+			<tr>
+		 		<td>Website*:</td>
+		 		<td><input type="text" name="website" value="http://"></td>
+			</tr>
+		</table> <br/>
+		<p>Comments*:</p>
+		<p><textarea rows="5" cols="50"></textarea> </p>	<br/>
+		<p>your name:	<input type="text" name="yname" style="background-color:yellow;"/> </p>	<br/>
+		<p>Password: <input type="password" name="password"/> </p>	<br/>
+    <!--Radio buttons-->
+  	Do you like pizza?
+	   	<p>
+				<input type="radio" name="pizza" value="yes"/>yes<br/>
+				<input type="radio" name="pizza" value="no"/>no<br/>
+				<input type="radio" name="pizza" value="maybe"/>maybe<br/>
+				<input type="radio" name="pizza" value="never"/>never tried<br/><br/>
+	  	</p>
+    <!--Check box-->
+		<p><input type="checkbox" name="like" value="yes" /> Check this box if you like our service	</p> <br/>
+  	Anythig you would like to say?
+		<p><textarea rows="3" cols="50"></textarea>	</p> <br/>
+  	I like
+		<p>
+		 	<select name="food" multiple="4">
+			 	<option value="mushrooms" selected="selected">mushrooms</option>
+				<option value="green peppers">green peppers</option>
+				<option value="onions">onions</option>
+				<option value="tomatoes">tomatoes</option>
+				<option value="olives">olives</option>
+			</select>
+		</p> <br/>
+  	Your favorite color:
+		<p>
+			<select name="color">
+				<option value="red" selected="selected">red</option>
+				<option value="green">green</option>
+				<option value="orange">orange</option>
+				<option value="yellow">yellow</option>
+			</select>
+		</p> <br/>
+  	Attach file
+		<p><input type="file" name="file"/>	</p> <br/>
+    <!--submit button to submit the form-->
+		<input type="submit" value="Submit">
+    <!--reset button to reset the form-->
+		<input type="reset" value='reset'>
+	</form>
+</body>
+</html>
