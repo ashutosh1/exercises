@@ -1,0 +1,126 @@
+<html>
+<head>
+<style type="text/css">
+.main_menu_ul {list-style:none;}
+/*css style for main menu */
+.main_menu_li
+{
+  font-family:Georgia;
+  font-style:italic;
+	color:black;
+	font-size:18px;
+	float:left;
+	margin-left:2px;
+	position:relative;
+	border-bottom:solid 1px #6d6d6d;
+  background:#CFCFCF;
+	padding-left:20px;
+	padding-right:20px;
+	height:37px;
+}
+/*style for all links of main menu to show them as per image*/
+.main_menu_links
+{
+  display:block;
+	text-decoration:none;
+  color:black;
+	padding:10px;
+}
+/*settings for pseudo hover class of main menu links*/
+.main_menu_li:hover
+{
+	background:white;
+  border-top:solid 1px #6d6d6d;;
+  border-left:solid 1px #6d6d6d;;
+  border-right:solid 1px #6d6d6d;;
+}
+/*settings for unorderd list which will appear on hover of main menu links.*/
+.drop_down_ul
+{
+  left:-1px;
+	top:37px;       
+	height:auto;
+	width:178px;
+	padding:10px;
+	background:#FFFFFF; 
+	list-style:none;
+	position:absolute;
+	display:none;
+  border-left:solid 1px #6d6d6d;
+	border-right:solid 1px #6d6d6d;
+  border-bottom:solid 1px #6d6d6d;	
+	font-family:Georgia;
+  font-style:italic;
+	color:black;
+	font-size:14px;	
+}
+/*css for li which appears on hover of main menu links.*/
+.li_under_drop_down_ul
+{
+	background:#ffffff;
+	border-bottom: solid 1px #cfcfcf;
+	padding-top:5px;
+	padding-bottom:5px;
+}
+/*css for li links under main menu links*/
+.links_under_li
+{
+  color:black;
+	text-decoration:none;
+}
+/*displaying drop down menu on hover effect of main menu links*/
+.main_menu_li:hover .drop_down_ul{display:block;}
+/*Changing color of links element on hover effect*/
+.li_under_drop_down_ul:hover .links_under_li{color:#bd0707;}
+/*last drop down should not have underline.*/
+.li_under_drop_down_ul:last-child{border-bottom:solid 1px white;}
+/*filling blank space or creating complete border for last link of main menu on hover effect.*/
+.main_menu_li:last-child .drop_down_ul{left:-57px;}
+    
+</style>
+</head>
+
+<body>
+  <ul class="main_menu_ul">
+    <!--not showing drop down on hover effect of home -->
+	  <li class="main_menu_li"><a href="#" class="main_menu_links" style="margin-left:0px">HOME</a>	</li>
+    <!-- link for main menu and list of drop down which will display on hover effect of main menu link-->
+		<li class="main_menu_li"><a href="#" class="main_menu_links">About Us</a>
+  		<ul class="drop_down_ul">
+        <!--overriding default style(color) for first link according to image,it should have color #bd0707-->
+			  <li class="li_under_drop_down_ul"><a href="#" class="links_under_li" style="color:#bd0707;">Example 1</a></li>
+				<li class="li_under_drop_down_ul"><a href="#" class="links_under_li">Example 2</a></li>
+        <li class="li_under_drop_down_ul"><a href="#" class="links_under_li">Example 3</a></li>
+				<li class="li_under_drop_down_ul"><a href="#" class="links_under_li">Example 4</a></li>
+			</ul>
+		</li>
+    <!-- link for main menu and list of drop down which will display on hover effect of main menu link-->
+		<li class="main_menu_li"><a href="#" class="main_menu_links">Our Services</a>
+			<ul class="drop_down_ul">
+			  <li class="li_under_drop_down_ul"><a href="#" class="links_under_li" style="color:#bd0707;">Example 1</a></li>
+				<li class="li_under_drop_down_ul"><a href="#" class="links_under_li">Example 2</a></li>
+        <li class="li_under_drop_down_ul"><a href="#" class="links_under_li">Example 3</a></li>
+ 				<li class="li_under_drop_down_ul"><a href="#" class="links_under_li">Example 4</a></li>
+			</ul>
+		</li>
+    <!-- link for main menu and list of drop down which will display on hover effect of main menu link-->
+		<li class="main_menu_li"><a href="#" class="main_menu_links">Our Portfolio</a>
+  	  <ul class="drop_down_ul">
+			  <li class="li_under_drop_down_ul"><a href="#" class="links_under_li" style="color:#bd0707;">Example 1</a></li>
+				<li class="li_under_drop_down_ul"><a href="#" class="links_under_li">Example 2</a></li>
+        <li class="li_under_drop_down_ul"><a href="#" class="links_under_li">Example 3</a></li>
+        <li class="li_under_drop_down_ul"><a href="#" class="links_under_li">Example 4</a></li>
+			</ul>
+		</li>
+    <!-- link for main menu and list of drop down which will display on hover effect of main menu link-->
+		<li class="main_menu_li"><a href="#" class="main_menu_links">Contact Us</a>
+      <ul class="drop_down_ul">
+			  <li class="li_under_drop_down_ul"><a href="#" class="links_under_li" style="color:#bd0707;">Example 1</a></li>
+				<li class="li_under_drop_down_ul"><a href="#" class="links_under_li">Example 2</a></li>
+        <li class="li_under_drop_down_ul"><a href="#" class="links_under_li">Example 3</a></li>
+        <li class="li_under_drop_down_ul"><a href="#" class="links_under_li">Example 4</a></li>
+			</ul>
+		</li>
+	</ul>
+</body>
+</html>
