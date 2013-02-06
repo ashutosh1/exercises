@@ -1,0 +1,119 @@
+<html>
+<head>
+<style type="text/css">
+/*css for main header,top section of doc.*/
+.header{
+  background:#b2e7ff;
+	border-bottom:solid 2px #0ab1ff;
+	font-style:tamoha;
+	font-size:24px;
+	color:black;
+	text-align:center;
+	width:100%;		
+  height:50px;
+  padding-top:30px;
+}
+/*css for left section of document.*/
+.left_section
+{
+	background:#0ab1ff;
+	padding:25px 10px;
+	width:23%;
+}
+/*css for right section of document.width for left and right section is shown in % and it came after calculating the % based on the pixels for left and right side which were 230px and 710px.*/
+.right_section
+{
+	position:relative;
+	background:#ededed;
+	padding:20px;
+  width:71%;
+}
+/* displaying properly left and right section of document according to image*/
+.left_section, .right_section
+{
+	display:table-cell;
+}
+/*css for head or top section of the left side of the document.*/
+.head_of_left_section
+{
+	font-style:tamoha;
+	color:black;
+	font-size:18px;	
+}
+/*css for mid section of the left side of the document.*/
+.mid_of_left_section
+{
+	font-style:tamoha;
+	color:white;
+	font-size:14px;
+}
+/*css for bottom section of the left side of the document.*/
+.bottom_of_left_section
+{
+	font-style:tamoha;
+	color:black;
+	font-size:12px;
+}
+/*css for head or top section of the right side of the document.*/
+.head_of_right_section
+{
+  font-style:tamoha;
+	color:black;
+	font-size:24px;
+}
+/*css for mid section of the right side of the document.*/
+.mid_of_right_section
+{
+	font-style:tamoha;
+	color:#802525;
+	font-size:14px;
+}
+/*css for footer section of the document.*/
+.footer
+{
+	font-style:tamoha;
+	color:black;
+	font-size:24px;
+  background:#3cff78;
+	border-bottom:solid 2px #0ab1ff;
+	text-align:center;
+	width:100%;
+  height:50px;
+  padding-top:30px;
+}
+</style>
+</head>
+<!-- html section starts here -->
+<body>
+	<div class="header">
+		This is header
+	</div>
+	<div class="left_section">
+		<div class="head_of_left_section">
+			This is head of left section of document
+		</div>
+    <div class="mid_of_left_section">
+		  <ul shape="circle">
+				<li>Navigation link 1</li>  <br/>
+				<li>Navigation link 2</li><br/>
+				<li>Navigation link 3</li><br/>
+				<li>Navigation link 4</li><br/>
+			</ul>
+		</div>
+		<div class="bottom_of_left_section">
+			Ashutosh learning css and completing the assignment.
+		</div>
+	</div>
+	<div class="right_section">
+		<div class="head_of_right_section">
+			This is right section where probably title of post will be shown.
+		</div>
+		<div class="mid_of_right_section">
+      This is the section where post will be shown.
+    </div>
+  </div>
+  <div class="footer">
+	  This is footer
+  </div>
+</body>
+</html>
