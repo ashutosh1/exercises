@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+//function to check or uncheck the all check boexes.
+function selectAllOrNone(status) {
+  var field = document.getElementsByTagName("input");
+  for (i = 0; i < field.length; i++) {
+    field[i].checked = status;
+  }
+}
+</script>
+</head>
+
+<body>
+  <input type = "checkbox" name = "color" value = "1">red<br/>
+  <input type = "checkbox" name = "color" value = "2">green<br/>
+  <input type = "checkbox" name = "color" value = "3">yellow<br/>
+  <input type = "checkbox" name = "color" value = "4">white<br/>
+  <input type = "checkbox" name = "color" value = "5">black<br/>
+  <button onclick = "selectAllOrNone(true)">Select All</button>
+  <button onclick = "selectAllOrNone(false)">Select None</button>
+</body>
+</html>
