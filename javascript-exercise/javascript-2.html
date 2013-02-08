@@ -1,0 +1,52 @@
+<html>
+<head>
+<script>
+var count = 0;
+var str = '';
+//to check the boxes on click and show an alert if 3 boxes has been selected.
+function check(element) {
+ 	var boxes = document.getElementsByTagName("input");  
+ 	document.getElementsByName("none")[0].checked=false;
+	if(element.checked) {
+    count++;     
+  }
+	else {
+    count--;   
+  }	
+  if(count>3) {
+    element.checked=false;
+		count--;
+		str = '';
+    for(var i=0; i<boxes.length; i++) {
+  	  if(boxes[i].checked) {
+		    str += boxes[i].value 
+        //this logic is to achive the proper format of string according to exercise for ex.day1 , day2 and day3
+        str += (str.length <= 9 ? ' , ' : (i == 2 ? '' : ' and ')); 
+		  }
+    }
+   alert("Only 3 days can be selected. You have already selected " + str);
+  }
+}
+//To uncheck all the selected check boxes.
+function uncheckAll() {
+  count = 0;
+  str = '';
+	var boxes = document.getElementsByTagName("input");
+	for(i=0; i<boxes.length-1; i++) {
+    boxes[i].checked = false;
+	}
+}
+</script>
+</head>
+
+<body>
+  <input type="checkbox" value="sunday" onclick="check(this)">Sunday<br/>
+	<input type="checkbox" value="monday" onclick="check(this)">Monday<br/>
+	<input type="checkbox" value="tuesday" onclick="check(this)">Tuesday<br/>
+	<input type="checkbox" value="wednesday" onclick="check(this)">Wednesday<br/>
+	<input type="checkbox" value="thursday" onclick="check(this)">Thursday<br/>
+ 	<input type="checkbox" value="friday" onclick="check(this)">Friday<br/>
+	<input type="checkbox" value="saturday" onclick="check(this)">Saturday<br/>
+	<input type="checkbox" name="none" value="none" onclick="uncheckAll()"/>None
+</body>
+</html>
