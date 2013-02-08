@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function selected(element, id) {       
+  var parent = document.getElementById(id);
+  var childs = parent.getElementsByTagName('input');
+  //if element is checked the diplay its children and vice-versa.
+  element.checked ? document.getElementById(id).style.display="block" : document.getElementById(id).style.display="none"
+  //if element is checked then cheking all childs and vice versa.
+  for(i=0; i<childs.length; i++) {
+    element.checked ? childs[i].checked=true : childs[i].checked=false;
+  } 
+  element.scrollIntoView(true);  
+}
+</script>
+</head>
+<body>
+  <div style="height:100px; width:50%; overflow:scroll;">
+	  <ul style="list-style:none;">		
+		  <li>
+			  <input type="checkbox" onclick="selected(this, 'childcolor')">Color
+				<ul style="list-style:none; display:none" id="childcolor">
+					<li><input type="checkbox" name="color" value="1">Red</li>
+					<li><input type="checkbox" name="color" value="2">Blue</li>
+					<li><input type="checkbox" name="color" value="3">Green</li>
+					<li><input type="checkbox" name="color" value="4">Yellow</li>
+				</ul>			
+			</li>
+
+			<li>
+				<input type="checkbox" onclick="selected(this, 'childmovies')">Movies
+				<ul id = "childmovies" style="list-style:none; display:none">
+					<li><input type="checkbox" name="movies" value="1">Dar</li>
+					<li><input type="checkbox" name="movies" value="2">Sir</li>
+				</ul>			
+			</li>
+
+			<li>
+				<input type="checkbox" onclick="selected(this, 'childdrinks')">Drinks
+				<ul id = "childdrinks" style="list-style:none; display:none">
+					<li><input type="checkbox" name="drinks" value="1">Coke</li>
+					<li><input type="checkbox" name="drinks" value="2">Pepsi</li>
+					<li><input type="checkbox" name="drinks" value="3">Dew</li>
+				</ul>
+			</li>
+	
+			<li>
+				<input type="checkbox" onclick="selected(this, 'childbikes')">Bikes
+				<ul id = "childbikes" style="list-style:none; display:none">
+					<li><input type="checkbox" name="bikes" value="1">V-Rod</li>
+					<li><input type="checkbox" name="bikes" value="2">Pulsar</li>
+					<li><input type="checkbox" name="bikes" value="3">Cbz</li>	
+				</ul>
+			</li>
+		</ul>
+  </div>
+</body>
+</html>
+
