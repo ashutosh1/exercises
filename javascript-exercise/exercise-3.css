@@ -1,0 +1,26 @@
+/*To make background like background of image given in exercise.*/
+body{background-color:#ececec;}
+/*styling for outer div,table will be inside it.*/
+.box
+{
+  width:50%;
+  background:white;
+  border:solid 1px #bcbcbc;
+  padding-top:20px;
+  padding-bottom:10px;
+  padding-left:0px;
+  padding-right:10px;
+  position:relative;
+  right:-300px;	
+}
+/*styling for inner div or style for 'Add New Row' button*/
+.innerdiv
+{ 
+  padding-top:0px;
+  padding-bottom:20px;
+  padding-left:30px;
+  padding-right:30px;
+  position:relative;
+  right:-40px
+}
+
