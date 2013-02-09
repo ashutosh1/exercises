@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function urlTesting() {
+	var url = prompt("Enter the complete url with http://");
+  //onload function picks current url and append the entered url after it if url entered without http. 
+	if(/http:/.test(url))	{
+	  window.open (url, "_blank","menubar=no,resizable=no,dependent=no,status=no,scrollbars=no, width=400px, height=450px"); 
+	}
+  else {
+    //if user leaves the box or enter spaces the show the error .
+    if(!(/\S/.test(url)) || url == null || url == "" || url === undefined) {
+      alert("Please fill the url , You can not leave it blank OR Do not use space and tab.");  
+      urlTesting();
+    }
+    else {
+      //if user entered without http the show prompt again with proper message.
+     // alert("Please fill the complete url. For ex. 'http://www.google.com'");
+     url = "http://" + url
+  	 window.open (url, "_blank","menubar=no,resizable=no,dependent=no,status=no,scrollbars=no, width=400px, height=450px");    
+    }
+  }
+}
+</script>
+</head>
+<body onload="urlTesting();"></body>
+</html>
+
