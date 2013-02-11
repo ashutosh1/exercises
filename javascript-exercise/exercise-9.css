@@ -1,0 +1,57 @@
+/*To make background like background of image given in exercise.*/
+body{background-color:#ececec;}
+/*style for main div*/
+.maindiv
+{
+  width:60%;
+  background:white;
+  border:solid 1px #bcbcbc;
+  padding-bottom:10px;
+  position:relative;
+  right:-300px;	
+}
+/*styling for div of form*/
+.box
+{
+  width:60%;
+  background:#ececec;
+  border:solid 1px #bcbcbc;
+  padding-top:0px;
+  padding-bottom:10px;
+  position:relative;
+  right:-150px;	
+}
+/*style for all labels.*/
+.labels{
+  float:left;
+  width:100px;
+  font-weight:bold;
+  margin-left:10px;
+  position:relative;
+  text-align:justify;
+}
+
+#aboutme
+{
+  height:100px;
+  width:95%;
+  margin-left:5px;
+}
+#recmail
+{
+  margin-left:10px;
+}
+/*style for span for registration form.*/
+span
+{
+  background:green;
+  margin-bottom:10px;
+  display:block;
+  color:white;
+}
+/*style for time zone*/
+#timezone{
+  width:170px;
+  font-size:13px;
+  background:white;
+}
