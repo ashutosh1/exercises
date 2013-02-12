@@ -1,0 +1,23 @@
+/*style for ul to show the suggestion*/
+ul
+{
+	display:none;
+	list-style:none;
+	margin-left:1.5px;
+	margin-top:-03.5px;
+	width:134px;
+	border:solid 1px black;
+	position:absolute;
+}
+/*on hover of suggestion changing the color*/
+li:hover
+{
+	background:black;
+  color:white;
+}
+li
+{
+	margin-left:-40px;
+	cursor:pointer;
+}
+
