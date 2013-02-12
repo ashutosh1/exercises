@@ -1,7 +1,7 @@
 function validate() {
   var wrongAttr = 0
   if (!validate_email()) {
-    alert("Please enter a correct email");
+//    alert("Please enter a correct email");
     wrongAttr = wrongAttr + 1
   }
   if (!validate_url()) {
@@ -21,35 +21,14 @@ function validate() {
 //validation for proper format of email.
 function validate_email() {
   var email = document.getElementById("email").value;
-  var remail_pattern = /^([A-z])+(\.?\w+)*@[A-z]+(\.[A-z]{2,4}){1,2}/;
+  var remail_pattern = /[a-zA-Z] + [a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|edu|gov|mil|biz|info|mobi|name|aero|asia|jobs|museum)\b/;
   return (remail_pattern.test(email));
 }
 //validation for proper format of url with http.
 function validate_url() {
   var url = document.getElementById("homepage").value;
-  var url_pattern = /^(https?:\/\/)?(([A-z]+\.)*)([A-z]+\.[A-z]{2,4})$/;
+  var url_pattern = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
   return (url_pattern.test(url));
 }
 
-//function validate_email() {
-//  var email = document.getElementById("email").value;
-//  var remail_pattern = /^([A-z])+(\.?\w+)*@[A-z]+(\.[A-z]{2,4}){1,2}/;
-//  if (email != null || email.trim() != "" || remail_pattern.test(email)) {
-//        return false;
-//  }
-//  else {
-// 
-//        return ();
-//    }
-//}
-
-//function validate_url() {
-//    var url = document.getElementById("homepage").value;
-//    if (url === null || url.trim() === "") {
-//        return false;
-//    } else {
-//        var url_pattern = /^(https?:\/\/)?(([A-z]+\.)*)([A-z]+\.[A-z]{2,4})$/;
-//        return (url_pattern.test(url));
-//    }
-//}
 
