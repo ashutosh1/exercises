@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple JavaScript memory game</title>
+	<link rel="stylesheet" href="memory-game.css"/>
+	<script src="memory-game.js"></script>
+</head>
+<body>
+  <h3>Welcome to vinsol memory game</h2>
+  <p style="background-color:white;color:brown;">The aim of the game is to match the hide picture pairs. when clicking on a box,it shows the hidden picture. When the next card is matching, you have found a pair. That pair stays uncovered. If the two cards are not matching, it is being covered up again. The game is finished if you uncovered all pairs. Try to do it with as little tries as possible.</p>        
+  <p style="background-color:white;color:gray;">Please click on <b>Start</b> to play the game.</p>
+  <center>
+    <table id="game_table">
+	      <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+	      <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+	      <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+	      <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+	      <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+	      <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    </table>
+  </center>
+  <!--show stop button after starting the game and 'Play Again' button after finishing the game.-->
+  <div id="div1">
+	  Total clicks: <span id="total_clicks">0</span>    
+	  Time: <span id="timer">00:00</span> 
+	  <button id="button1" onclick="startGame()">Start</button>
+	  <button id="button2" onclick="stopGame()" style="display:none;">Stop</button>
+    <button id="button3" onclick="playAgain();" style="display:none;">Play Again</button>
+    <div id = "result" style="display:none;"><div>
+  </div>
+</body>
+</html>
+

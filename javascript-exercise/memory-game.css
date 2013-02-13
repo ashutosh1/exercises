@@ -1,0 +1,30 @@
+/*To make background like background of image given in exercise.*/
+body{background-color:#ececec;}
+/*style for main div*/
+#game_table {
+  width:50%;
+  background:white;
+  position:relative;
+}
+#game_table td {
+  border: 1px solid #ececec;
+  cursor: pointer;
+  height: 50px;
+  width: 50px;
+  padding-left:20px;
+  position:relative;
+}
+#game_table td:hover {
+  background-color: #DDDDDD;
+}
+#div1 {
+  text-align: center;
+}
+#result
+{
+  float: center;
+  padding-left:10px;
+  color:white;
+  background-color: black;
+}
+
