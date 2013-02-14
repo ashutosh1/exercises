@@ -1,0 +1,37 @@
+body{background-color:#ececec;}
+#p1{
+  background-color:white;
+  color:brown;
+}
+#p2{
+  background-color:white;
+  color:gray;
+}
+#div1{
+  width:20%;
+  background-color:gray;
+  color:white;
+}
+#div2{
+  width:22%;
+  background-color:gray;
+  color:white;
+}
+#div3{
+  width:20%;
+  background-color:green;
+  color:white;
+}
+#div4{
+  width:100%;
+  background-color:gray;
+  color:white;
+}
+#button1{
+  float:left;
+  display:inline;
+}
+#button2{
+  display:none;
+  float:left;
+}
