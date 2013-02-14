@@ -20,4 +20,8 @@ li
 	margin-left:-40px;
 	cursor:pointer;
 }
-
+p
+{
+  background-color: white;
+  color:gray;
+}
