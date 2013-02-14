@@ -16,6 +16,11 @@ function validate() {
     alert("About me should be grater than or equal to 50 charcter and it should not be blank.");
     blankAttr = blankAttr + 1
   }
+  //check for receive notification , it should be checked.
+  if(!document.getElementById("recmail").checked){
+    alert("Recive Notification should be checked.");
+    blankAttr = blankAttr + 1
+  }
   var wrongAttr = 0
   if (!validate_email()) {
     alert("Please enter a correct email");
