@@ -20,11 +20,20 @@ body{background-color:#ececec;}
 #div1 {
   text-align: center;
 }
-#result
-{
+#result {
   float: center;
   padding-left:10px;
   color:white;
   background-color: black;
 }
-
+#p1 {
+  background-color:white;
+  color:brown;
+}
+#p2 {
+  background-color:white;
+  color:gray;
+}
+#button2,#button3,#result {
+  display:none;
+}
