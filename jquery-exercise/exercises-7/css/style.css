@@ -187,6 +187,12 @@ body {
 	display: none;
 	margin: 0;
 }
+#nav li ul li:hover {
+  background-color: blue;
+}
+#nav li ul.present {
+	display: block;
+}
 
 #nav li ul li {
 	float: none;
