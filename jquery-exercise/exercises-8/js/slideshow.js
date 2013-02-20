@@ -7,9 +7,9 @@ $(document).ready(function() {
   var i = 1;
   var length = $ ("#slideshow li").size();
   $('#slideshow li:first').fadeIn();
+  showCountAndCurrentImage(length,i);
   var mainFunction = setInterval(function(){showAndHide()},5000 );
   function showAndHide(){
-    showCountAndCurrentImage(length,i);
     $("#slideshow li:nth-child(" + i + ")").fadeOut(1000);
     if(i == length){i = 1;}
     else{ i += 1;}
