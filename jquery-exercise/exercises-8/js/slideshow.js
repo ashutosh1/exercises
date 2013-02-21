@@ -4,9 +4,9 @@ $(document).ready(function() {
   $newDiv = $('<div><div/>').insertAfter($('#slideshow')).attr("class","newdiv");
   var i = 0;
   var length = $ ("#slideshow li").size();
-  showCountAndCurrentImage(length,i)
   function showAndHide(){
-     $("#slideshow li:eq(" + i + ")").fadeIn(1000,function() {showCountAndCurrentImage(length,i)}).delay(1000).fadeOut(2000,function() {rotateImage()});
+    showCountAndCurrentImage(length,i)
+    $("#slideshow li:eq(" + i + ")").fadeIn(1000).delay(1000).fadeOut(2000,function() {rotateImage()});
   }
   function rotateImage(){
     if (i == (length-1)){i = 0;}
