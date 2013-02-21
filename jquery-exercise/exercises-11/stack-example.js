@@ -1,7 +1,7 @@
 $('document').ready(function(){
   $stack = $("#stack");
   var count = 0;
-  $('button').click(function () {
+  $('button').live("click",function () {
     count++;
     $item = $('<div>' + count + '</div>');
     $item.addClass("item");
