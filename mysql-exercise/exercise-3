@@ -1,0 +1,14 @@
+mysql> create database vtapp;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> CREATE USER 'vtapp_user'@'localhost' IDENTIFIED BY 'passwd';
+Query OK, 0 rows affected (0.01 sec)
+
+**To provide all type of previliges on vtapp db.
+mysql> GRANT ALL PRIVILEGES ON vtapp.* TO 'vtapp_user'@'localhost';
+Query OK, 0 rows affected (0.00 sec)
+
+**to allow only access ,user can't drop ,delete,update and insert.
+mysql> GRANT SELECT ON vtapp.* TO 'vtapp_user'@'localhost';
+Query OK, 0 rows affected (0.00 sec)
+
