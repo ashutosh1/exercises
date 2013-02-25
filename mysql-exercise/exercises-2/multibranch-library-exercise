@@ -1,0 +1,138 @@
+*************Problems**********************************
+1.the names of all library books published by Macmillan. 
+mysql> select title from titles where publisher='macmillan';
++----------+
+| title    |
++----------+
+| susannah |
+| the wife |
++----------+
+2 rows in set (0.00 sec)
+
+2.branches that hold any books by Ann Brown (using a nested subquery). 
+mysql> select distinct branch from holdings where title in (select title from titles where author='ann brown');
+OR
+mysql> select distinct branch from holdings where title= any(select title from titles where author='ann brown');
++--------+
+| branch |
++--------+
+| b1     |
+| b2     |
+| b3     |
++--------+
+3 rows in set (0.00 sec)
+
+3.branches that hold any books by Ann Brown (without using a nested subquery). 
+mysql> select distinct holdings.branch  from titles, holdings where (titles.author='ann brown') and (titles.title=holdings.title);
+OR
+mysql> select distinct holdings.branch  from titles inner join holdings on (titles.author='ann brown' && titles.title=holdings.title);
++--------+
+| branch |
++--------+
+| b1     |
+| b3     |
+| b2     |
++--------+
+3 rows in set (0.00 sec)
+
+4.the total number of books held at each branch.
+mysql> select branch, sum(copies) as no_of_books from holdings group by branch;
++--------+-------------+
+| branch | no_of_books |
++--------+-------------+
+| b1     |           6 |
+| b2     |           9 |
+| b3     |           9 |
++--------+-------------+
+3 rows in set (0.00 sec)
+
+*****************table creation and insertion and status************************************
+mysql> create table branch (
+    -> bcode varchar(25),
+    -> librarian varchar(25),
+    -> address varchar(25),
+    -> primary key (bcode));
+Query OK, 0 rows affected (0.17 sec)
+
+mysql> insert into branch
+    -> values ('b1', 'john smith', '2 anglesea road'),
+    -> ('b2', 'mary jones', '34 pearse st'),
+    -> ('b3', 'francis owens', 'george x');
+Query OK, 3 rows affected (0.05 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from branch;
++-------+---------------+-----------------+
+| bcode | librarian     | address         |
++-------+---------------+-----------------+
+| b1    | john smith    | 2 anglesea road |
+| b2    | mary jones    | 34 pearse st    |
+| b3    | francis owens | george x        |
++-------+---------------+-----------------+
+3 rows in set (0.01 sec)
+
+mysql> create table titles (
+    -> title varchar(25) not null,
+    -> author varchar(25),
+    -> publisher varchar(25),
+    -> primary key (title));
+Query OK, 0 rows affected (0.15 sec)
+
+mysql> insert into titles
+    -> values ('susannah', 'ann brown', 'macmillan'),
+    -> ('how to fish', 'amy fly', 'stop press'),
+    -> ('a history of dublin', 'david little', 'wiley'),
+    -> ('computer', 'blaise pascal', 'applewoods'),
+    -> ('the wife', 'ann brown', 'macmillan');
+Query OK, 5 rows affected (0.06 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from titles;
++---------------------+---------------+------------+
+| title               | author        | publisher  |
++---------------------+---------------+------------+
+| a history of dublin | david little  | wiley      |
+| computer            | blaise pascal | applewoods |
+| how to fish         | amy fly       | stop press |
+| susannah            | ann brown     | macmillan  |
+| the wife            | ann brown     | macmillan  |
++---------------------+---------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> create table holdings (
+    -> branch varchar(25) not null,
+    -> title varchar(25) not null,
+    -> copies int,
+    -> primary key (branch, title));
+Query OK, 0 rows affected (0.16 sec)
+
+mysql> insert into holdings
+    -> values ('b1', 'susannah', 3),
+    -> ('b1', 'how to', 2),
+    -> ('b1', 'a history og dublin', 1),
+    -> ('b2', 'how to fish', 4),
+    -> ('b2', 'computer', 2),
+    -> ('b2', 'the wife', 3),
+    -> ('b3', 'a history og dublin', 1),
+    -> ('b3', 'computer', 4),
+    -> ('b3', 'susannah', 3),
+    -> ('b3', 'the wife', 1);
+Query OK, 10 rows affected (0.06 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> select * from holdings;
++--------+---------------------+--------+
+| branch | title               | copies |
++--------+---------------------+--------+
+| b1     | a history og dublin |      1 |
+| b1     | how to              |      2 |
+| b1     | susannah            |      3 |
+| b2     | computer            |      2 |
+| b2     | how to fish         |      4 |
+| b2     | the wife            |      3 |
+| b3     | a history og dublin |      1 |
+| b3     | computer            |      4 |
+| b3     | susannah            |      3 |
+| b3     | the wife            |      1 |
++--------+---------------------+--------+
+10 rows in set (0.00 sec)
