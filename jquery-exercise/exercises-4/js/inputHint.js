@@ -11,7 +11,9 @@ $(document).ready(function (){
   $('label[for="q"]').remove();
   //Bind a focus event to the search input that removes the hint text and the "hint" class
   $('#search input.input_text').bind('focus', function () {
-    $(this).val("").removeClass("hint");
+    if($(this).val() == a && $(this).hasClass('hint')){
+      $(this).val("").removeClass("hint");
+    }
   });
   //Bind a blur event to the search input that restores the hint text and "hint" class if no search text was entered
   $('#search input.input_text').bind('blur', function () {
