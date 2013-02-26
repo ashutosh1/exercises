@@ -1,0 +1,53 @@
+//taking dump in /opt
+ashutosh@harsh:~$  mysqldump -u root -p exercises > /opt/exercises/mysql-exercise/exercises-5/exercise.sql;
+Enter password: 
+
+**after entering password a file named exercise.sql created .
+
+//creating restored database
+ashutosh@harsh:~$ mysql -h localhost -p -u root
+Enter password: 
+mysql> create database restored;
+Query OK, 1 row affected (0.00 sec)
+
+//restoring the restored database.
+ashutosh@harsh:~$ mysql -u root -p restored < /opt/exercises/mysql-exercise/exercises-5/exercise.sql;
+Enter password: 
+
+mysql> use restored;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables;
++--------------------+
+| Tables_in_restored |
++--------------------+
+| articles           |
+| branch             |
+| categories         |
+| comments           |
+| holdings           |
+| locations          |
+| sandwiches         |
+| tastes             |
+| testing_table      |
+| titles             |
+| users              |
++--------------------+
+11 rows in set (0.00 sec)
+
+mysql> select * from articles;
++----+---------------------------+----------------------------------------------------------+---------+---------------+
+| id | name                      | matter                                                   | user_id | categories_id |
++----+---------------------------+----------------------------------------------------------+---------+---------------+
+|  1 | defination of grid comput | grid computing is blah blah blah                         |       1 |             5 |
+|  2 | defination of cloud compu | cloud computing is blah blah blah                        |       2 |             4 |
+|  3 | Economical downterm       | Reason behind the econimical down...                     |       3 |             1 |
+|  4 | Recession                 | prime reason of recession and economical breakdown is... |       3 |             1 |
+|  5 | Tsunami                   | Natural disaster is an example of gods fury....          |       4 |             2 |
+|  6 | Poverty in Orissa         | increasing poverty in Orissa....                         |       3 |             3 |
+|  7 | future in grid computing  | future is awsome in grid computing...                    |       1 |             5 |
++----+---------------------------+----------------------------------------------------------+---------+---------------+
+7 rows in set (0.00 sec)
+
