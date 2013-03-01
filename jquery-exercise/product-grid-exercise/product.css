@@ -1,0 +1,36 @@
+body{background:#ececec;}
+#div1{
+  background:white;
+	padding:10px;
+	width:20%;
+  display:inline;
+  color:gray;
+}
+
+#div2{
+	position:relative;
+	background:#ececec;
+	padding:10px;
+  width:20%;
+  color:black;
+}
+
+#div3{
+	position:relative;
+	background:white;
+	padding:20px;
+  width:45%;
+}
+.inrdiv{
+  /*display:table-cell;*/
+  display:inline;
+  padding:10px;
+  margin:10px;
+}
+#div1, #div2 ,#div3{
+  display:table-cell;
+}
+.hidden{
+  width:1px;
+  display:inline;
+}
