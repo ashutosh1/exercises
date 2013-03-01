@@ -1,0 +1,60 @@
+body{background:#ececec;}
+#roles
+{
+  width:130px;
+  height:auto;
+  border:solid 2px black;
+  position:relative;
+  top:100px;
+  text-align:center;
+  right:-50px;
+  float:left
+} 
+
+#employee
+{
+  width:130px;
+  height:auto;
+  border:solid 2px black;
+  position:fixed;
+  top:100px;
+  text-align:center;
+  left:250px;
+  float:left
+}
+
+#todoDiv
+{
+  width:530px;
+  border:solid 2px black;
+  position:relative;
+  top:100px;
+  right:-300px;
+  text-align:center;
+  float:left; 
+  height:auto;
+}
+
+#header
+{
+border-bottom:solid 2px black;
+}
+.innerDiv
+{
+  border:solid 1px black; 
+  text-align:center; !important 
+  height:25px;	
+}
+
+.toDoInnerDiv
+{
+  border:solid 2px black; 
+  text-align:center; 
+  height:25px;	
+}
+
+.hidden 
+{
+display:none;
+}
+
