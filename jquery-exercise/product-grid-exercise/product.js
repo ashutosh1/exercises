@@ -1,201 +1,104 @@
-//after document ready loading the data 
+//after document ready, loading the data 
 $(document).ready(function(){
-  var colors, brands, datas;
-  var arrData = [];
+  var arrData = [],avl = [],brnd = [],color = [] ;
   $.ajax({
     url: 'product.json',
     type: 'GET',
     dataType: 'json',
     success: function(data,status,xhr){
-      datas = data;
       writeData(data);
-    },
-    error: function(data){alert("There is some errro.");} 
+    }
   });
   //appending all html and binding click event to chekboxes
   function writeData(data){
     $('#div1').append($('<ul></ul>').attr('id', 'ul1'));
     $('#div2').append($('<ul></ul>').attr('id', 'ul2'));
-    $('#maindiv').append("<input type='checkbox' name='all' value='all' >"+"All Products"+"</input>");
+    $('#maindiv').append("<input type='checkbox' id ='abc' name='all' value='all' >"+"All Products"+"</input>");
     $('#maindiv').append("<input type='checkbox' name='available' value='available' >"+"Available Products"+"</input>");
-    brands = getUniqueBrand(data);
-    colors = getUniqueColor(data);
-    //listing all brand and color in div with checkboxes.
-    listBrand(brands);
-    listColor(colors);
-    //binding click event to all check boxes.
-    $('#maindiv input[name="all"]').on('click',function(){
-      arrData = [];
-      clearTheMesh($(this));});
-    $('#maindiv input[name="available"]').on('click',function(){showAvailableProducts();});
-    $('li input[type=checkbox]').on('click',function(){
-      if($(this).is(':checked')){
-        handleTheConditions($(this));
-      }
-    });
-    //inserting images in third vertical div.
+    var colors = [],brands = []; 
+    //inserting images in third vertical div and collecting color and brand to show in div1 and div2
     $.each(data,function(idx,val){
       var $img = "<img  src=product_data/images/" + val.url + " alt= The Image " + "width=100 height=100 >" ; 
       $('#div3').append($('<div></div>').html($img).attr('class','inrdiv'));
+      colors.push(val.color);
+      brands.push(val.brand);
+    });
+    //listing all brand and color in respective div with checkboxes through extracting the unique color and brand.
+    listBrandAndColor(getUniqueValues(brands),getUniqueValues(colors));
+    //saving src or url of image in data attribute according to avilable options
+    $(':checkbox').each(function(){storeValuesInData($(this),data);});     
+    //binding click event to all check boxes.
+    $(':checkbox').on('click',function(){
+      if($(this).is(':checked')){showProducts($(this));}
     });
   }
 
-  function handleTheConditions(obj){
-    if(arrData.length == 4){
-      arrData = [];
-      clearTheMesh(obj);
+  function storeValuesInData(obj,data){
+    var products = [];
+    var valu = obj.attr('value');
+    var name = obj.attr('name'); 
+    if (name == 'all'){
+      $.each(data,function(idx,val){products.push(val.url);});
     }
-    arrData.push(obj.attr('name'));
-    arrData.push(obj.attr('value'));
-    if(arrData.length == 2){
-      //display the images on the basis of color or brand
-      displayUsingBrandOrColor(arrData);
-    }
-    else if(arrData.length == 4 && ((arrData[0] == 'brand' && arrData[2] == 'color') ||(arrData[0] == 'color' && arrData[2] == 'brand'))){
-    $('#div3 div').removeClass('hidden').addClass('inrdiv'); 
-    $('.inrdiv img').css('display','inline');   
-      //display the images using color and brands
-      displayUsingBrandAndColor(arrData);
-    } 
-    else {
-      arrData = arrData.splice(-2);
-      clearTheMesh(obj);  
-      displayUsingBrandOrColor(arrData); 
-    }
-  } 
-
-  function listBrand(brns){
-    $.each(brns,function(idx,val){
-      $('#ul1').append($('<li></li>').text(val).attr('class','brandli').append("<input type='checkbox' name='brand' value= \" '"+val+"'\">"));
-    });
-  }
-
-  function listColor(clrs){
-    $.each(clrs,function(idx,val){
-      $('#ul2').append($('<li></li>').text(val).attr('class','colorli').append("<input type='checkbox' name='color' value= \" '"+val+"'\">"));
-    });
-  }
-
-  function getUniqueBrand(data){
-    var a = [];
-    $.each(data,function(idx,val){a.push(val.brand);});
-    return a.filter(function(itm,i,a){return i==a.indexOf(itm)});    
-  }
-
-  function getUniqueColor(data){
-    var a = [];
-    $.each(data,function(idx,val){a.push(val.color);});
-    return a.filter(function(itm,i,a){return i==a.indexOf(itm)});    
-  }
-
-  function displayUsingBrandOrColor(arr){
-    var noMatch = [];
-    if(arr[0]=='brand'){ 
-      $.each(datas,function(idx,val){
-        if(("'" +val.brand+"'") == $.trim(arr[1])){
-          noMatch.push(val.url)
-        }
+    else if(name == 'available'){
+      $.each(data,function(idx,val){
+        if(val.sold_out == "0"){products.push(val.url)};
       });
     }
-    else{
-      $.each(datas,function(idx,val){
-        if(("'" +val.color+"'") == $.trim(arr[1])){
-          noMatch.push(val.url)
-        }
-      });     
+    else if(name == 'brand'){
+      $.each(data,function(idx,val){
+        if(("'" +val.brand+"'") == $.trim(valu)){products.push(val.url)};
+      });      
     }
-   hideTheImages(noMatch);
+    else if(name == 'color'){
+      $.each(data,function(idx,val){
+        if(("'" +val.color+"'") == $.trim(valu)){products.push(val.url)};
+      });      
+    }      
+    obj.data('images',products);//storing the url of images in data attribute.
   }
-
-  function displayUsingBrandAndColor(arr){
-    var noMatch = [];
-    if((arr[0]=='brand' && arr[2]=='color') || (arr[0]=='color' && arr[2]=='brand')){
-      $.each(datas,function(idx,val){
-        var a = ("'" +val.brand+"'") == $.trim(arr[1]) && ("'" +val.color+"'") == $.trim(arr[3]);
-        var b = ("'" +val.color+"'") == $.trim(arr[1]) && ("'" +val.brand+"'") == $.trim(arr[3]);
-        if(a || b){
-          noMatch.push(val.url)
-        }
-      });    
-      if(noMatch.length == 0){
-        alert("There is no product for chossen brand and color.")
-        return false;
-      }
-     hideTheImages(noMatch);
-    } 
-  }
-
-  function clearTheMesh(obj){
-    $(':checkbox').attr('checked',false);
-    obj.attr('checked',true);
+  
+  function showProducts(obj){
     $('#div3 div').removeClass('hidden').addClass('inrdiv'); 
     $('.inrdiv img').css('display','inline');   
-  }
-
-  function showAvailableProducts(){
+    if (obj.attr('name')=='all'){
+      arrData = [],brnd =[],color =[],avl = [];
+      $(':checkbox').attr('checked',false);
+      obj.attr('checked',true);
+    }
+    else if(obj.attr('name')=='available'){avl = avl.concat(obj.data('images')); }
+    else if(obj.attr('name')=='brand'){brnd = brnd.concat(obj.data('images')); }
+    else if(obj.attr('name')=='color'){color = color.concat(obj.data('images')); }
     if(arrData.length == 0){
-      removeSoldProduct();
-    }  
-    else if(arrData.length == 2){
-      showProductsForColorOrBrand();
-    }
-    else if(arrData.length == 4){
-      showProductsForColorAndBrand();
-    }
-  }
-  function removeSoldProduct(){
-    var noMatch = [];
-    $.each(datas,function(idx,val){ 
-      if(val.sold_out == "0"){
-        noMatch.push(val.url)
-      }
-    });    
-   hideTheImages(noMatch);
-  }
-
-  function showProductsForColorOrBrand(){
-    var noMatch = [];
-    if(arrData[0]=='brand'){ 
-      $.each(datas,function(idx,val){
-        if(("'" +val.brand+"'") == $.trim(arrData[1]) && val.sold_out == "0"){
-          noMatch.push(val.url)
-        }
-      });
+      arrData = obj.data('images');              
     }
     else{
-      $.each(datas,function(idx,val){
-        if(("'" +val.color+"'") == $.trim(arrData[1]) && val.sold_out == "0"){
-          noMatch.push(val.url)
-        }
-      });     
-    }
-   hideTheImages(noMatch);
-  }
-
-  function showProductsForColorAndBrand(){
-    var noMatch = [];
-    if((arrData[0]=='brand' && arrData[2]=='color') || (arrData[0]=='color' && arrData[2]=='brand')){
-      $.each(datas,function(idx,val){
-        var a = ("'" +val.brand+"'") == $.trim(arrData[1]) && ("'" +val.color+"'") == $.trim(arrData[3]);
-        var b = ("'" +val.color+"'") == $.trim(arrData[1]) && ("'" +val.brand+"'") == $.trim(arrData[3]);
-        if((a || b) && val.sold_out == "0"){
-          noMatch.push(val.url)
-        }
-      });    
-      if(noMatch.length == 0){
-        alert("There is no product for chossen brand and color.")
-        return false;
-      }
-     hideTheImages(noMatch);
-    } 
-  }
-  //hide those images which are not shown based on the requirement.
-  function hideTheImages(images){
+      $('input[name="all"]').attr('checked',false);
+      var d = (avl.length != 0),b = (brnd.length != 0),c = (color.length != 0);
+      if((b && !c && !d)||(!b && c && !d) ||(!b && !c && d)){arrData = avl.concat(brnd).concat(color);}
+      else if((b&&c&&!d)){arrData = $(color).filter(brnd);}
+      else if((!b&&c&&d)){arrData = $(avl).filter(color);}
+      else if((b&&!c&&d)){arrData = $(brnd).filter(avl);}
+      else if((b&&c&&d)){arrData = $(avl).filter(brnd).filter(color);}
+     }
     $('.inrdiv img').each(function(){
-      if(($.inArray($(this).attr('src').slice(20,26),images)) < 0){
+      if(($.inArray($(this).attr('src').slice(20,26),arrData)) < 0){
         $(this).css('display','none').parent().removeClass('inrdiv').addClass('hidden');
       }
     });
+  }
+
+  function listBrandAndColor(brns,clrs){
+    $.each(brns,function(idx,val){
+      $('#ul1').append($('<li></li>').text(val).append("<input type='checkbox' name='brand' value= \" '"+val+"'\">"));
+    });
+    $.each(clrs,function(idx,val){
+      $('#ul2').append($('<li></li>').text(val).append("<input type='checkbox' name='color' value= \" '"+val+"'\">"));
+    });
+  }
+
+  function getUniqueValues(values){
+    return values.filter(function(itm,i,values){return i==values.indexOf(itm)});    
   }
 });
  
