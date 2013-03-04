@@ -133,18 +133,20 @@ NOTE: Above is good for current case but it will give only one result if more th
 mysql> insert into comments(comment,user_id,articles_id) values('This is an awsome article','1','2');
 Query OK, 1 row affected (0.06 sec)
 
-mysql> select articles_id from comments  group by articles_id  having count(articles_id)= (SELECT MAX(counts) FROM (SELECT COUNT(articles_id) AS counts FROM comments GROUP BY articles_id ) as counts);
+mysql> select articles_id from comments  group by articles_id  having count(articles_id)= (select count(articles_id) as counts from comments group by articles_id order by counts desc limit 1);
 +-------------+
 | articles_id |
 +-------------+
+|           1 |
 |           2 |
 |           3 |
 +-------------+
-2 rows in set (0.00 sec)
+3 rows in set (0.00 sec)
+
 
 5.Write a query to select article which does not have more than one comment by the same user ( do this using left join and also do it using group by )
 >>>>Article id 1 has more than one comments by the same user.
-mysql> select articles.id from articles left join (select articles_id from comments group by articles_id having(count(user_id)-count(distinct user_id))=0) as comnts on articles.id=comnts.articles_id where comnts.articles_id is not null;
+mysql> select articles.id from articles inner join (select articles_id from comments group by articles_id having(count(user_id)-count(distinct user_id))=0) as comnts on articles.id=comnts.articles_id;
 +----+
 | id |
 +----+
