@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="jquery-1.7.2.min.js"></script>
+  <script src="cart.js"></script>
+  <link rel="stylesheet" href="cart.css">
+</head>
+<body>
+  <div id="main">
+      <div id="product">Products</div>
+      <div id="cart">My Cart</div>
+	</div>
+  <div id="productsBody"></div>
+  <div id="cartsBody">
+      <div class="cartHeader" style="width:240px;">Products</div>
+      <div class="cartHeader">Price</div>
+      <div class="cartHeader">Quantity</div>
+      <div class="cartHeader">Subtotal</div>
+      <div class="cartHeader">Remove</div>
+  </div>
+  <div class="footer">
+   	<div id="total">
+		  Total:<input class ="total" type="text" style="width:70px" disabled> </input>
+      <input type="button" id ="checkout" style="width:70px">
+	  </div>
+  </div>
+</body>
+</html>

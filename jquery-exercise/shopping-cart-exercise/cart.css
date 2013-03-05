@@ -1,0 +1,79 @@
+#main{
+  overflow:hidden; 
+  border-right:1px solid #fff;
+  z-index:100;
+ }
+#product , #cart{
+  float:left;
+  background:#ddd;
+  border:1px solid #fcfcfc;
+  cursor:pointer;
+  line-height:35px;
+  padding:0 30px;
+  text-transform:uppercase;
+ }
+#productsBody > div {
+  display:block;
+  width:100%;
+  overflow:hidden; 
+  background:#eee;
+  border:1px solid #fcfcfc;
+}
+#cartsBody {
+  overflow:hidden; 
+  background:#eee;
+  border:1px solid #fcfcfc;
+}
+
+#cart-target{
+  width:100%;
+  overflow:hidden; 
+  border:1px solid #fcfcfc;
+}
+#cartproduct,#cartquantity,#cartprice,#subtotal,#remove{
+  display:table-cell;
+  overflow:hidden; 
+  background:#eee;
+  border-right:1px solid #fcfcfc;
+  width:150px; 
+  height:90px;
+  text-align:center;
+  padding:10px;
+}
+
+.cartHeader{
+  display:table-cell;
+  overflow:hidden; 
+  background:#eee;
+  border-right:1px solid #fcfcfc;
+  width:150px; 
+  text-align:center;
+  padding:10px;
+}
+
+.footer
+{
+  position:absolute;
+  width:100%;
+  border-bottom:solid 1px black;
+  background-color:#eee;
+  margin:1px;
+}
+
+.product
+{
+	background:#ededed;
+	padding:20px;
+  width:100%;
+  border:1px solid white;
+}
+#checkout{
+  background-color:gray;
+  color:white;
+}
+#checkout:hover{background-color:black;cursor:pointer;}
+.add{background-color:white;}
+.add:hover{background-color:gray;}
+.total{background-color:white;}
+#subTarget,#img,#add,#quantity {margin:15px;}
+
