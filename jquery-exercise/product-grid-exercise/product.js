@@ -30,6 +30,7 @@ $(document).ready(function(){
     //binding click event to all check boxes.
     $(':checkbox').on('click',function(){
       if($(this).is(':checked')){showProducts($(this));}
+      else{removeProducts($(this));}
     });
   }
 
@@ -59,8 +60,6 @@ $(document).ready(function(){
   }
   
   function showProducts(obj){
-    $('#div3 div').removeClass('hidden').addClass('inrdiv'); 
-    $('.inrdiv img').css('display','inline');   
     if (obj.attr('name')=='all'){
       arrData = [],brnd =[],color =[],avl = [];
       $(':checkbox').attr('checked',false);
@@ -69,6 +68,25 @@ $(document).ready(function(){
     else if(obj.attr('name')=='available'){avl = avl.concat(obj.data('images')); }
     else if(obj.attr('name')=='brand'){brnd = brnd.concat(obj.data('images')); }
     else if(obj.attr('name')=='color'){color = color.concat(obj.data('images')); }
+    showConditionalProducts(obj);
+  }
+  
+  function removeProducts(obj){
+    if($(':checkbox').is(':checked')){
+      if(obj.attr('name')=='available'){avl = diff(avl , obj.data('images')); }
+      else if(obj.attr('name')=='brand'){brnd = diff(brnd , obj.data('images')); }
+      else if(obj.attr('name')=='color'){color = diff(color , obj.data('images')); }
+    }
+    else{
+      arrData = [],brnd =[],color =[],avl = [];
+      arrData = $('input[name="all"]').data('images');       
+    }
+    showConditionalProducts(obj);
+  }
+
+  function showConditionalProducts(obj){
+    $('#div3 div').removeClass('hidden').addClass('inrdiv'); 
+    $('.inrdiv img').css('display','inline');   
     if(arrData.length == 0){
       arrData = obj.data('images');              
     }
@@ -99,6 +117,10 @@ $(document).ready(function(){
 
   function getUniqueValues(values){
     return values.filter(function(itm,i,values){return i==values.indexOf(itm)});    
+  }
+
+  function diff(a,b){
+    return $.grep(a, function(elm){return $.inArray(elm, b) == -1});
   }
 });
  
