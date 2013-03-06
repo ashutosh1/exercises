@@ -1,1 +1,3 @@
-[{"id":"1", "title":"Apple Macbook Pro", "category":"Computers", "price":"2299.99", "image":"a.jpg", 	"quantity":"0" },{"id":"1", "title":"Sony VAIO", "category":"Computers", "price":"2699.99", "image":"b.jpg","quantity":"0" },	{"id":"1", "title":"Canon Digital Rebel XT", "category":"Camera", "price":"550", "image":"c.jpg", 	"quantity":"0" }]
+[{"id":"1", "title":"Apple Macbook Pro Notebook PC", "category":"Computers", "description":"Apple is king of laptop world" ,"price":"2299.99", "image":"images/a.jpg", 	"quantity":"0" },
+	  {"id":"1", "title":"Sony VAIO Notebook PC", "category":"Computers", "description":"Sony is Ace of laptop world", "price":"2699.99", "image":"images/b.jpg",	 	"quantity":"0" },
+	  {"id":"1", "title":"Canon Digital Rebel XT", "category":"Cameras", "description":"canon is king of cameras world" ,"price":"550", "image":"images/c.jpg", 	"quantity":"0" }]

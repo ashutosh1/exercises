@@ -1,9 +1,14 @@
 $(document).ready(function () {
-  var products = [{"id":"1", "title":"Apple Macbook Pro Notebook PC", "category":"Computers", "description":"Apple is king of laptop world" ,"price":"2299.99", "image":"images/a.jpg", 	"quantity":"0" },
-	  {"id":"1", "title":"Sony VAIO Notebook PC", "category":"Computers", "description":"Sony is Ace of laptop world", "price":"2699.99", "image":"images/b.jpg",	 	"quantity":"0" },
-	  {"id":"1", "title":"Canon Digital Rebel XT", "category":"Cameras", "description":"canon is king of cameras world" ,"price":"550", "image":"images/c.jpg", 	"quantity":"0" }];
-  var total = 0, i = 0, cart_items = {};
-  loadProducts(products);
+  var total = 0, i = 0, cart_items = {},products={};
+  $.ajax({
+    url: 'cart.json',
+    type: 'GET',
+    dataType: 'json',
+    success: function(data,status,xhr){
+      products = data;
+      loadProducts(products);
+    }
+  });
   //loading product to show the user in body
   function loadProducts (products) {
   $.each(products, function () {i++;
@@ -26,11 +31,11 @@ $(document).ready(function () {
 	  target.append(add);
 	  $('#productsBody').append(target);
 	  });
+    $('input[name="add"]').val('Add To Cart');
+    $('input[name="quantity"]').val('1');
+    $('.add').on('click',function(){addProductsToCart($(this));});
   }  
   //binding click event and assign intial values to some variable or field
-  $('.add').on('click',function(){addProductsToCart($(this));});
-  $('input[name="add"]').val('Add To Cart');
-  $('input[name="quantity"]').val('1');
   $('.total').val('0.00');
   $('#checkout').val('Checkout');
   $('#cartsBody div').hide();
