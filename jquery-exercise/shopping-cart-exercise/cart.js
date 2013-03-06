@@ -53,7 +53,7 @@ $(document).ready(function () {
   function addProductsToCart(obj) { 
     var count = 0;
 	  var parent = obj.parents('div.product');
-    var quantity = parseInt($('input[name="quantity"]').val());
+    var quantity = parseInt($('#' + parent.attr('id')+' input[name="quantity"]').val());
     quantity == 0 ? quantity += 1 : quantity;
     var id = parent.attr('id')-1; 
     if(!cart_items [id]) {
@@ -73,17 +73,17 @@ $(document).ready(function () {
       target.append(remove);
       $('#cartsBody').append(target).hide();
       $('input[name="remove"]').val('Remove');
-      $('input[name="cartquantity"]').val(quantity);
+      $('#cart-target'+id+' input[name="cartquantity"]').val(cart_items[id].quantity);
       $('.removep').on('click',function(){removeProductsfromCart($(this));});
-      updateTotal();
       count++;
     }
     else {
       cart_items[id].quantity += quantity;
       $('#cart-target'+id+' .innersub').text(cart_items[id].quantity * cart_items[id].price);
       $('#cart-target'+id+' input[name="cartquantity"]').val(cart_items[id].quantity);
-      updateTotal();
     }    
+    updateTotal();
+    updateSpan();
     $('input[name="quantity"]').val('1');
     $('#cart-target'+id+' input[name="cartquantity"]').on('change',function(){updateTheData($(this),id);});
   }
@@ -102,6 +102,7 @@ $(document).ready(function () {
     obj.parent().siblings().remove();                                      
     obj.parent().remove();                                      
     updateTotal();
+    updateSpan();
   }
   //After changing the quantity in cart page the total and sub total will be updated
   function updateTheData(obj,id){
@@ -110,5 +111,14 @@ $(document).ready(function () {
     cart_items[id].quantity = qunt;
     obj.parent().next('div').text(cart_items[id].price * qunt);
     updateTotal();
+    updateSpan();
+  }
+  //to show the total quantity in cart with mycart div
+  function updateSpan(){
+    var qun = 0; 
+    $('input[name="cartquantity"]').each(function(){
+      qun = qun + parseInt($(this).val());
+    });
+    $('#span').text("(" + qun + ")");
   }
 });
