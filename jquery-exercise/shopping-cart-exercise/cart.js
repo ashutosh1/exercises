@@ -59,12 +59,15 @@ $(document).ready(function () {
     var count = 0;
 	  var parent = obj.parents('div.product');
     var quantity = parseInt($('#' + parent.attr('id')+' input[name="quantity"]').val());
-    quantity == 0 ? quantity += 1 : quantity;
+    if(quantity <= 0){
+      alert("Quantity should be 1 or greater than one");
+      return false;   
+    }
     var id = parent.attr('id')-1; 
     if(!cart_items [id]) {
     	var temp = products[id];
       cart_items [id] = { "title" : temp["title"], "category" : temp["category"], "price" : temp["price"], "image" : temp["image"],  "quantity" : quantity };
-      var target = $('<div id="cart-target'+ id +'"></div>');
+      var target = $('<div class="cart-item" id="cart-target'+ id +'"></div>');
       var image = $('<div id="img " style="float:left;"><img src=' + temp["image"] + ' width=90 height=90></div>');
 	    var title = $('<div id="cartproduct">' + temp["title"] + '</div>');
 	    var price = $('<div id="cartprice"> Price: ' + temp["price"] + '</div>');
@@ -102,7 +105,7 @@ $(document).ready(function () {
   }
   //to remove the products from cart
   function removeProductsfromCart(obj) { 
-    var cartId = parseInt(obj.parent().parent().attr('id').slice(-1)) ;
+    var cartId = parseInt(obj.closest('div.cart-item').attr('id').slice(-1)) ;
     delete cart_items[cartId];
     obj.parent().siblings().remove();                                      
     obj.parent().remove();                                      
@@ -112,11 +115,14 @@ $(document).ready(function () {
   //After changing the quantity in cart page the total and sub total will be updated
   function updateTheData(obj,id){
     var qunt = parseInt(obj.val());
-    $('#cart-target'+id+' input[name="cartquantity"]').val(qunt);
-    cart_items[id].quantity = qunt;
-    obj.parent().next('div').text(cart_items[id].price * qunt);
-    updateTotal();
-    updateSpan();
+    if(qunt==0){removeProductsfromCart(obj);}
+    else{
+      $('#cart-target'+id+' input[name="cartquantity"]').val(qunt);
+      cart_items[id].quantity = qunt;
+      obj.parent().next('div').text(cart_items[id].price * qunt);
+      updateTotal();
+      updateSpan();
+    }
   }
   //to show the total quantity in cart with mycart div
   function updateSpan(){
