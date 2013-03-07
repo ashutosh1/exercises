@@ -28,10 +28,7 @@ $(document).ready(function(){
     //saving src or url of image in data attribute according to avilable options
     $(':checkbox').each(function(){storeValuesInData($(this),data);});     
     //binding click event to all check boxes.
-    $(':checkbox').on('click',function(){
-      if($(this).is(':checked')){showProducts($(this));}
-      else{removeProducts($(this));}
-    });
+    $(':checkbox').on('click',function(){showProducts($(this));});
   }
 
   function storeValuesInData(obj,data){
@@ -60,45 +57,30 @@ $(document).ready(function(){
   }
   
   function showProducts(obj){
+    resetValues();
     if (obj.attr('name')=='all'){
-      arrData = [],brnd =[],color =[],avl = [];
       $(':checkbox').attr('checked',false);
       obj.attr('checked',true);
     }
-    else if(obj.attr('name')=='available'){avl = avl.concat(obj.data('images')); }
-    else if(obj.attr('name')=='brand'){brnd = brnd.concat(obj.data('images')); }
-    else if(obj.attr('name')=='color'){color = color.concat(obj.data('images')); }
+    else if($("input:checked").length != 0){
+      $("input:checked").each(function(){
+        if($(this).attr('name')=='available'){avl = avl.concat($(this).data('images')); }
+        else if($(this).attr('name')=='brand'){brnd = brnd.concat($(this).data('images')); }
+        else if($(this).attr('name')=='color'){color = color.concat($(this).data('images')); }
+      });
+      arrData = [];
+    }
     showConditionalProducts(obj);
   }
   
-  function removeProducts(obj){
-    if($(':checkbox').is(':checked')){
-      if(obj.attr('name')=='available'){avl = diff(avl , obj.data('images')); }
-      else if(obj.attr('name')=='brand'){brnd = diff(brnd , obj.data('images')); }
-      else if(obj.attr('name')=='color'){color = diff(color , obj.data('images')); }
-    }
-    else{
-      arrData = [],brnd =[],color =[],avl = [];
-      arrData = $('input[name="all"]').data('images');       
-    }
-    showConditionalProducts(obj);
-  }
-
   function showConditionalProducts(obj){
-    $('#div3 div').removeClass('hidden').addClass('inrdiv'); 
-    $('.inrdiv img').css('display','inline');   
-    if(arrData.length == 0){
-      arrData = obj.data('images');              
+    var len = [avl.length ,brnd.length ,color.length ];
+    len = $.grep(len,function(elm){return elm != 0});
+    if(len.length == 1){arrData = avl.concat(brnd).concat(color);}
+    else if(len.length == 3){arrData = $(avl).filter(brnd).filter(color);}
+    else if(len.length == 2){
+      arrData = avl.length == 0 ? $(color).filter(brnd) : (brnd.length == 0 ? $(avl).filter(color) : $(brnd).filter(avl))
     }
-    else{
-      $('input[name="all"]').attr('checked',false);
-      var d = (avl.length != 0),b = (brnd.length != 0),c = (color.length != 0);
-      if((b && !c && !d)||(!b && c && !d) ||(!b && !c && d)){arrData = avl.concat(brnd).concat(color);}
-      else if((b&&c&&!d)){arrData = $(color).filter(brnd);}
-      else if((!b&&c&&d)){arrData = $(avl).filter(color);}
-      else if((b&&!c&&d)){arrData = $(brnd).filter(avl);}
-      else if((b&&c&&d)){arrData = $(avl).filter(brnd).filter(color);}
-     }
     $('.inrdiv img').each(function(){
       if(($.inArray($(this).attr('src').slice(20,26),arrData)) < 0){
         $(this).css('display','none').parent().removeClass('inrdiv').addClass('hidden');
@@ -115,12 +97,14 @@ $(document).ready(function(){
     });
   }
 
-  function getUniqueValues(values){
-    return values.filter(function(itm,i,values){return i==values.indexOf(itm)});    
-  }
+  function getUniqueValues(values){return values.filter(function(itm,i,values){return i==values.indexOf(itm)});}
 
-  function diff(a,b){
-    return $.grep(a, function(elm){return $.inArray(elm, b) == -1});
+  function resetValues(){
+    arrData = [],brnd =[],color =[],avl = [];
+    arrData = $('input[name="all"]').data('images');
+    $('#div3 div').removeClass('hidden').addClass('inrdiv'); 
+    $('.inrdiv img').css('display','inline');   
+    $('input[name="all"]').attr('checked',false);
   }
 });
  
