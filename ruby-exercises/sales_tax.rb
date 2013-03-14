@@ -1,6 +1,6 @@
-class SalesTax 
-  @@items = {}
+class Item
   def list  
+    items = {}
     begin
       print "Name of the product: "
       name = gets.strip
@@ -12,21 +12,26 @@ class SalesTax
       price = gets.strip.to_i
       print "Do you want to add more items to your list(y/n): "
       add_more = gets.strip
-      @@items[name] = [name,imported,exmpted,price]
+      items[name] = [name,imported,exmpted,price]
     end until add_more.strip.downcase == "n"
-    calculate()
+    items
   end
- 
+end  
+
+class SalesTax 
   def calculate
     first = true
+    grand_total = 0
     @@items.each do|key,val|
       item = @@items[key]
       item[1].downcase == "y" ? imp_duty = (item[3] * 5.0/100.0).round(2) : imp_duty = 0
       item[2].downcase == "y" ? sale_tax = 0 : sale_tax = (item[3] * 10.0/100.0).round(2) 
       item[3] = (item[3] + imp_duty + sale_tax).round
+      grand_total += item[3]
       display(item,first) 
       first = false
     end
+    show_grand_total(grand_total)
   end
 
   def display(item,first)
@@ -41,6 +46,18 @@ class SalesTax
     print sprintf("%15.15s","#{item[3]} \n")
     puts "--------------------------------------------------------------------------"
   end
+
+  def show_grand_total(total)
+    puts "Grand Total: #{total}"
+    puts "--------------------------------------------------------------------------"
+  end
 end
 
-obj = SalesTax.new.list
+class Master
+  require_relative 'Items'
+  def invoke_all_methods
+    items = Items.new.list
+  end
+end 
+Master.new.invoke_all_methods
+#obj = SalesTax.new.list
