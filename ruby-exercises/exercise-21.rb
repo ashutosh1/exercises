@@ -5,9 +5,12 @@ last_name = gets.chomp
 class Name
 	def initialize (first_name, last_name)
     begin	
-  	  raise "First Name is not capitalize or nil" if first_name.empty? || first_name != first_name.capitalize
+  	  raise "First name is nil" if first_name.empty?
   	  raise "Last name is nil" if last_name.empty?
+  	  raise "First Name is not capitalize" if first_name != first_name.capitalize
       puts first_name + last_name
+    rescue Exception => e
+      puts e.message
     end
   end
 end
