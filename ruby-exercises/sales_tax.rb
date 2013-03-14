@@ -1,4 +1,4 @@
-class Item
+class Items
   def list  
     items = {}
     begin
@@ -18,22 +18,24 @@ class Item
   end
 end  
 
-class SalesTax 
-  def calculate
-    first = true
-    grand_total = 0
-    @@items.each do|key,val|
-      item = @@items[key]
+class SalesTaxs 
+  def calculate(items)
+    first, grand_total = true, 0
+    obj_display = Displays.new
+    items.each do|key,val|
+      item = items[key]
       item[1].downcase == "y" ? imp_duty = (item[3] * 5.0/100.0).round(2) : imp_duty = 0
       item[2].downcase == "y" ? sale_tax = 0 : sale_tax = (item[3] * 10.0/100.0).round(2) 
       item[3] = (item[3] + imp_duty + sale_tax).round
       grand_total += item[3]
-      display(item,first) 
+      obj_display.display(item,first) 
       first = false
     end
-    show_grand_total(grand_total)
+    DisplayGrandTotal.new.show_grand_total(grand_total)
   end
+end
 
+class Displays 
   def display(item,first)
     if(first) 
       puts "--------------------------------------------------------------------------"
@@ -46,7 +48,9 @@ class SalesTax
     print sprintf("%15.15s","#{item[3]} \n")
     puts "--------------------------------------------------------------------------"
   end
+end 
 
+class DisplayGrandTotal
   def show_grand_total(total)
     puts "Grand Total: #{total}"
     puts "--------------------------------------------------------------------------"
@@ -54,10 +58,11 @@ class SalesTax
 end
 
 class Master
-  require_relative 'Items'
   def invoke_all_methods
     items = Items.new.list
+    SalesTaxs.new.calculate(items)
   end
-end 
+end
+#Invoking list method of items class and calculate method of sales tax class
 Master.new.invoke_all_methods
-#obj = SalesTax.new.list
+
