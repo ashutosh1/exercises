@@ -1,10 +1,10 @@
 require 'csv'
-hash = Hash.new(Array.new)
-CSV.open('a.csv','w') do |csv|
-  CSV.foreach("exercises/ruby-exercises/csv-exercise/info.csv") do |line|
-    hash[line[2]] += [line[0] + '(Empid: ' + line[1] + ')']
+information = Hash.new(Array.new)
+CSV.open('new_info.csv','w') do |csv|
+  CSV.foreach(File.expand_path('info.csv')) do |line|
+    information[line[2]] += [line[0] + '(Empid: ' + line[1] + ')']
   end
-  hash.each do|key,val|
+  information.each do|key,val|
     csv.add_row([key + ' :'])
     val.each{|v| csv << [v]}
     csv.puts([])
