@@ -3,7 +3,7 @@ first_name = gets.chomp
 puts "Enter Your Last Name"
 last_name = gets.chomp
 class Name
-	def initialize (first_name, last_name)
+  def initialize (first_name, last_name)
     begin	
   	  raise "First name is nil" if first_name.empty?
   	  raise "Last name is nil" if last_name.empty?
