@@ -1,11 +1,12 @@
 class Array
   def make_hash
-    hash = {}
+    hash = Hash.new(Array.new)
     for elm in self
-      hash.has_key?(elm.length.to_s) ? hash[elm.length.to_s].push(elm) : hash[elm.length.to_s] = [elm]
+      hash[elm.to_s.length] += [elm.to_s]
     end
     return hash
   end
 end
 
 puts ["123","asdf","342142","asd","1245","sadaasfsa","asdasda"].make_hash
+
