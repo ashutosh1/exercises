@@ -1,10 +1,7 @@
-puts "Enter The String To Check Palindrom.."
-string = gets.chomp
-string = string.downcase
-if (string.eql?('q'))
-	exit(0)
-  #abort "Text Entered by user is q"
-end
-string.reverse.eql?(string) ? 	str = "its a palindrome" : 	str = "its not a palindrome"
-puts str
+begin
+  puts "Enter The String To Check Palindrom.."
+  user_input = gets.chomp.downcase
+  exit(0) if user_input.eql?('q')
+  puts  user_input.reverse.eql?(user_input) ? "its a palindrome" : "its not a palindrome"
+end until user_input =='q'
 
