@@ -1,6 +1,6 @@
 class String 
   def to_s
-    puts swapcase
+    return swapcase
   end
 end
-"hello WORLD".to_s
+puts "hello WORLD".to_s
