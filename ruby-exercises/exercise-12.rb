@@ -4,8 +4,8 @@ def factorial(n)
   for i in 1..n 
     fact *= i 
   end 
- puts fact
+  fact
 end
 
-factorial(5)
+puts factorial(5)
 
