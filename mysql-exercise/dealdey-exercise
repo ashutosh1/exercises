@@ -1,1 +1,10 @@
-select user_id, users.created_at , deals.category_id ,(quantity*unit_price)+shipping_charges as FirstPurchasePrice ,count(*) as NoOfPurchase ,sum((quantity*unit_price)+shipping_charges) as TotalPurchaseAmount, (select count(referrer_id) from users where referrer_id=deals_users.user_id) as UserReferrerl  from deals_users, deals, users  where deals_users.deal_id = deals.id and user_id = users.id group by user_id;
+select user_id,max(users.created_at), max(deals.category_id), (quantity*unit_price)+shipping_charges as FirstPurchasePrice, count(*) as NoOfPurchase, sum((quantity*unit_price)+shipping_charges) as TotalPurchaseAmount, ifnull(user_referrer.count_referrer,0) count_referrer 
+from deals_users inner join deals
+       on deals_users.deal_id = deals.id
+       inner join users 
+       on user_id = users.id
+       left join 
+       (select referrer_id,count(referrer_id) as count_referrer from users group by referrer_id) as user_referrer
+       on user_id = user_referrer.referrer_id 
+group by user_id;
+
