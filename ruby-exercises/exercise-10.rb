@@ -3,10 +3,10 @@ class Pascal
     m.times do |i|
       k = 0 
       while (k < i+1)
-        yield(fact(i)/(fact(k)*fact(i-k)))
+        yield(fact(i) / (fact(k) * fact(i-k)))
         k += 1
       end
-     yield true 
+      yield true 
     end
   end
 
