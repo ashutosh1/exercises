@@ -1,6 +1,6 @@
 require 'time'
 def sum (*time)
-  sum , times = 0,[]
+  sum , times = 0 , []
   time.each do |i|
     if i.match(/^([0-1][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])$/)
       times.push(Time.parse(i))
@@ -10,7 +10,7 @@ def sum (*time)
     end
   end
   for i in 1..times.length-1
-    sum += times[i].hour*60*60 + times[i].min*60+ times[i].sec 
+    sum += times[i].hour * 60 * 60 + times[i].min * 60 + times[i].sec 
   end 
   total_sum = times[0] + sum 
   days = total_sum.day - times[0].day
