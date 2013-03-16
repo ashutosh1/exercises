@@ -1,19 +1,19 @@
 require 'time'
-def sum (*time)
-  sum , times = 0 , []
-  time.each do |i|
+def sum (*times) 
+  total_sec = 0
+  times.each do |i|
     if i.match(/^([0-1][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])$/)
-      times.push(Time.parse(i))
+      time = Time.parse(i)
+      total_sec += time.hour * 60 * 60 + time.min * 60  + time.sec 
     else
       puts "Please enter the time in 'HH:MM:SS' format"
       return false
     end
   end
-  for i in 1..times.length-1
-    sum += times[i].hour * 60 * 60 + times[i].min * 60 + times[i].sec 
-  end 
-  total_sum = times[0] + sum 
-  days = total_sum.day - times[0].day
-  puts "#{days} day & #{total_sum.to_s.slice(/([0-1][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])/)}"
+  net_sec = total_sec % 60
+  net_min = (total_sec / 60) % 60
+  net_hr = (total_sec / 3600) % 24
+  net_days = (total_sec / (3600 * 24)) % 24
+  puts "#{net_days} day & #{net_hr}:#{net_min}:#{net_sec}"
 end
-sum('22:40:40', '22:30:30','10:44:56','21:34:36')
+sum("11:23:07","22:53:45","00:23:23","23:45:56")
