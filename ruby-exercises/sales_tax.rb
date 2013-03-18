@@ -20,49 +20,57 @@ end
 
 class SalesTaxs 
   def calculate(items)
-    first, grand_total = true, 0
+    @grand_total = 0
     obj_display = Displays.new
+    obj_display.display_header
     items.each do|key,val|
       item = items[key]
       item[1].downcase == "y" ? imp_duty = (item[3] * 5.0/100.0).round(2) : imp_duty = 0
       item[2].downcase == "y" ? sale_tax = 0 : sale_tax = (item[3] * 10.0/100.0).round(2) 
       item[3] = (item[3] + imp_duty + sale_tax).round
-      grand_total += item[3]
-      obj_display.display(item,first) 
-      first = false
+      @grand_total += item[3]
+      obj_display.display(item) 
     end
-    DisplayGrandTotal.new.show_grand_total(grand_total)
+  end
+
+  def read_grand_total
+    DisplayGrandTotal.new.show_grand_total(@grand_total)
   end
 end
 
 class Displays 
-  def display(item,first)
-    if(first) 
-      puts "--------------------------------------------------------------------------"
-      puts ['Product','Imported','Exmpted','Price'].join("       |       ")
-      puts "--------------------------------------------------------------------------"
-    end  
-    print sprintf("%15.15s","#{item[0]} |")
-    print sprintf("%23.23s","#{item[1]} |")
-    print sprintf("%22.22s","#{item[2]} |")
-    print sprintf("%15.15s","#{item[3]} \n")
-    puts "--------------------------------------------------------------------------"
+  def display_header
+    puts "----------------------------------------------------------------------------------"
+    ['Product','Imported','Exmpted','Price'].each{|itm| printf("%20.20s","#{itm} |")}
+    puts 
+    puts "----------------------------------------------------------------------------------"
+  end  
+  
+  def display(item)
+    item.each{|itm| printf("%20.20s","#{itm} |")}
+    puts
+    puts "----------------------------------------------------------------------------------"
   end
 end 
 
 class DisplayGrandTotal
   def show_grand_total(total)
     puts "Grand Total: #{total}"
-    puts "--------------------------------------------------------------------------"
+    puts "----------------------------------------------------------------------------------"
   end
 end
 
 class Master
-  def invoke_all_methods
-    items = Items.new.list
-    SalesTaxs.new.calculate(items)
+  def invoke_list_methods
+    @items = Items.new.list
+  end
+
+  def invoke_claculate_method
+    SalesTaxs.new.calculate(@items)
   end
 end
 #Invoking list method of items class and calculate method of sales tax class
-Master.new.invoke_all_methods
+obj = Master.new
+obj.invoke_list_methods
+obj.invoke_claculate_method
 
