@@ -1,6 +1,6 @@
 //after document ready, loading the data 
 $(document).ready(function(){
-  var arrData = [],avl = [],brnd = [],color = [] ;
+  var arrData = [],available = [],brnd = [],color = [] ;
   $.ajax({
     url: 'product.json',
     type: 'GET',
@@ -13,7 +13,7 @@ $(document).ready(function(){
   function writeData(data){
     $('#div1').append($('<ul></ul>').attr('id', 'ul1'));
     $('#div2').append($('<ul></ul>').attr('id', 'ul2'));
-    $('#maindiv').append("<input type='checkbox' id ='abc' name='all' value='all' >"+"All Products"+"</input>");
+    $('#maindiv').append("<input type='checkbox' name='all' value='all' >"+"All Products"+"</input>");
     $('#maindiv').append("<input type='checkbox' name='available' value='available' >"+"Available Products"+"</input>");
     var colors = [],brands = []; 
     //inserting images in third vertical div and collecting color and brand to show in div1 and div2
@@ -24,17 +24,18 @@ $(document).ready(function(){
       brands.push(val.brand);
     });
     //listing all brand and color in respective div with checkboxes through extracting the unique color and brand.
-    listBrandAndColor(getUniqueValues(brands),getUniqueValues(colors));
+    listBrandAndColor(getUniqueValues(brands),'#ul1','brand');
+    listBrandAndColor(getUniqueValues(colors),'#ul2','color');
     //saving src or url of image in data attribute according to avilable options
     $(':checkbox').each(function(){storeValuesInData($(this),data);});     
     //binding click event to all check boxes.
-    $(':checkbox').on('click',function(){showProducts($(this));});
+    $(':checkbox').on('click',function(){showProducts($(this),data);});
   }
 
   function storeValuesInData(obj,data){
     var products = [];
     var valu = obj.attr('value');
-    var name = obj.attr('name'); 
+    var name = $.trim(obj.attr('name')); 
     if (name == 'all'){
       $.each(data,function(idx,val){products.push(val.url);});
     }
@@ -61,10 +62,12 @@ $(document).ready(function(){
     if (obj.attr('name')=='all'){
       $(':checkbox').attr('checked',false);
       obj.attr('checked',true);
+      $.each(data,function(idx,val){$(this).data('images',val.url);});
     }
     else if($("input:checked").length != 0){
+      $(this).data('images',val.url);
       $("input:checked").each(function(){
-        if($(this).attr('name')=='available'){avl = avl.concat($(this).data('images')); }
+        if($(this).attr('name')=='available'){available = available.concat($(this).data('images')); }
         else if($(this).attr('name')=='brand'){brnd = brnd.concat($(this).data('images')); }
         else if($(this).attr('name')=='color'){color = color.concat($(this).data('images')); }
       });
@@ -74,12 +77,12 @@ $(document).ready(function(){
   }
   
   function showConditionalProducts(obj){
-    var len = [avl.length ,brnd.length ,color.length ];
+    var len = [available.length ,brnd.length ,color.length ];
     len = $.grep(len,function(elm){return elm != 0});
-    if(len.length == 1){arrData = avl.concat(brnd).concat(color);}
-    else if(len.length == 3){arrData = $(avl).filter(brnd).filter(color);}
+    if(len.length == 1){arrData = available.concat(brnd).concat(color);}
+    else if(len.length == 3){arrData = $(available).filter(brnd).filter(color);}
     else if(len.length == 2){
-      arrData = avl.length == 0 ? $(color).filter(brnd) : (brnd.length == 0 ? $(avl).filter(color) : $(brnd).filter(avl))
+      arrData = available.length == 0 ? $(color).filter(brnd) : (brnd.length == 0 ? $(available).filter(color) : $(brnd).filter(available))
     }
     $('.inrdiv img').each(function(){
       if(($.inArray($(this).attr('src').slice(20,26),arrData)) < 0){
@@ -88,19 +91,16 @@ $(document).ready(function(){
     });
   }
 
-  function listBrandAndColor(brns,clrs){
-    $.each(brns,function(idx,val){
-      $('#ul1').append($('<li></li>').text(val).append("<input type='checkbox' name='brand' value= \" '"+val+"'\">"));
-    });
-    $.each(clrs,function(idx,val){
-      $('#ul2').append($('<li></li>').text(val).append("<input type='checkbox' name='color' value= \" '"+val+"'\">"));
+  function listBrandAndColor(brndsOrColors,parent,name){
+    $.each(brndsOrColors,function(idx,val){
+      $(parent).append($('<li></li>').text(val).append("<input type='checkbox' name=\" "+ name +" \" value= \" '"+ val +"'\">"));
     });
   }
 
   function getUniqueValues(values){return values.filter(function(itm,i,values){return i==values.indexOf(itm)});}
 
   function resetValues(){
-    arrData = [],brnd =[],color =[],avl = [];
+    arrData = [],brnd =[],color =[],available = [];
     arrData = $('input[name="all"]').data('images');
     $('#div3 div').removeClass('hidden').addClass('inrdiv'); 
     $('.inrdiv img').css('display','inline');   
